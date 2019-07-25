@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-github-raw",
-  "version": "1.2.7",
+  "version": "0.0.0",
   "description": "Fetch contents from Github Repositories and convert them into transformable graphql nodes",
   "engine": "node 10.15.3",
   "contributors": [
@@ -24,7 +24,6 @@
     "test:lint": "eslint --env node --ext .js src",
     "prettier": "prettier --write '{./,__{tests,mocks}__}/**/*.+(js|jsx)'",
     "prepare": "npm run test && npm run test:lint -- --fix && npm run build",
-    "postinstall": "node postInstall.js",
     "version:major": "npm version major --tag stable",
     "version:minor": "npm version minor --tag stable",
     "version:patch": "npm version patch",
