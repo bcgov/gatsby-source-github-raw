@@ -12,7 +12,7 @@ A simplified way of leveraging the `Github Contents Api` as Gatsby graphql nodes
 
 ## To Use
 
-- Install `npm install --save gatsby-source-github-raw`
+- Install `npm install --save @bcgov/gatsby-source-github-raw`
 - Add to your gatsby config
 ```js
 {
