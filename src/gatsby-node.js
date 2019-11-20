@@ -14,6 +14,7 @@
 //
 // Created by Patrick Simonian on 2019-06-04.
 //
+import chalk from 'chalk';
 import isString from 'lodash/isString';
 import isFunction from 'lodash/isFunction';
 import {
@@ -22,7 +23,7 @@ import {
   decodeFileContent,
   manifestIsValid,
 } from './utils';
-import { ERRORS } from './constants';
+import { ERRORS, NOMENCLATURE } from './constants';
 import { extractInformationFromGithubUrl, createFetchFileRoute } from './utils/url';
 import { validateAndFilterManifest } from './utils/manifest';
 import { fetchFile } from './utils/api';
@@ -71,7 +72,18 @@ export const sourceNodes = async (
     .map(entry => extractInformationFromGithubUrl(entry[1].url))
     .map(({ repo, owner, filepath, ref }) => createFetchFileRoute(repo, owner, filepath, ref));
 
-  const rawFiles = await Promise.all(fetchFileList.map(path => fetchFile(path, githubAccessToken)));
+  const rawFiles = await Promise.all(
+    fetchFileList.map(path => {
+      try {
+        return fetchFile(path, githubAccessToken);
+      } catch (e) {
+        console.warn(
+          `${chalk.yellow(NOMENCLATURE.name)} - the file found at path ${path} was not fetched`,
+        );
+        return Promise.resolve(null);
+      }
+    }),
+  );
   // filter out files that didn't fetch and then decode b64 content
   const decodedFiles = rawFiles.filter(f => f).map(decodeFileContent);
 
