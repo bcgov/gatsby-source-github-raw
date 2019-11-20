@@ -18,6 +18,7 @@ Created by Patrick Simonian
 // reusable nomenclature that is embedded into thrown errors and console logs
 export const NOMENCLATURE = {
   manifest: 'Manifest',
+  packageName: '@bcgov/gatsby-source-github-raw',
 };
 
 export const ERRORS = {
