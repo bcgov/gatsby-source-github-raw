@@ -34,7 +34,7 @@ export const fetchFile = async (path, token) => {
     },
   });
   const data = await result.json();
-  if (!result.ok) {
+  if (!result.ok || result.status !== 200) {
     throw new Error(
       `Error querying GitHub: ${result.status} ${result.statusText}\n${JSON.stringify(
         data,
