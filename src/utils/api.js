@@ -25,6 +25,7 @@ import fetch from 'node-fetch';
  * @param {String} token
  */
 export const fetchFile = async (path, token) => {
+  console.log(`Retrieving resource from "${path}"`);
   const result = await fetch(path, {
     method: 'GET',
     headers: {

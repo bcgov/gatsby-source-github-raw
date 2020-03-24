@@ -28,6 +28,7 @@ import { extractInformationFromGithubUrl, createFetchFileRoute } from './utils/u
 import { validateAndFilterManifest } from './utils/manifest';
 import { fetchFile } from './utils/api';
 import { createNodeObject } from './utils/createNode';
+import Bottleneck from 'bottleneck';
 
 export const sourceNodes = async (
   { getNodes, actions, createNodeId },
@@ -72,10 +73,17 @@ export const sourceNodes = async (
     .map(entry => extractInformationFromGithubUrl(entry[1].url))
     .map(({ repo, owner, filepath, ref }) => createFetchFileRoute(repo, owner, filepath, ref));
 
+  const limiter = new Bottleneck({
+    maxConcurrent: 1,
+    minTime: 333,
+  });
+
+  const limitedFetch = limiter.wrap(fetchFile);
+
   const rawFiles = await Promise.all(
     fetchFileList.map(path => {
       try {
-        return fetchFile(path, githubAccessToken);
+        return limitedFetch(path, githubAccessToken);
       } catch (e) {
         console.warn(
           `${chalk.yellow(NOMENCLATURE.name)} - the file found at path ${path} was not fetched`,
