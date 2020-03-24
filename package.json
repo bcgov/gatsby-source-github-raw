@@ -36,6 +36,7 @@
     "gatsby": "^2.6.0"
   },
   "dependencies": {
+    "bottleneck": "^2.19.5",
     "chalk": "^2.4.2",
     "crypto": "^1.0.1",
     "git-url-parse": "^11.1.2",
