@@ -1,6 +1,6 @@
 {
   "name": "@bcgov/gatsby-source-github-raw",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Leverages the Github Contents API to convert files into transformable Gatsby Nodes",
   "engine": "node 10.15.3",
   "contributors": [
@@ -42,9 +42,9 @@
     "git-url-parse": "^11.1.2",
     "graphql-fetch": "^1.0.1",
     "js-base64": "^2.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "mime-types": "^2.1.24",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "slugify": "^1.3.4",
     "valid-url": "^1.0.9"
   },
