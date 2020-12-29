@@ -1,7 +1,7 @@
-> This project is moving to `@bcgov/gatsby-source-github-raw` [repo](https://github.com/bcgov/gatsby-source-github-raw);
 # Gatsby Source Github Raw
 [![Build Status](https://travis-ci.com/patricksimonian/gatsby-source-github-raw.png?branch=master)](https://travis-ci.com/patricksimonian/gatsby-source-github-raw)
 
+> NOTE! Gatsby has introduced an api for [Creating Remote File Nodes](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem#createremotefilenode) which is a more generic utility compared to this plugin. Please consider utilizing the native utilities before using this package! 
 
 A simplified way of leveraging the `Github Contents Api` as Gatsby graphql nodes. 
 
