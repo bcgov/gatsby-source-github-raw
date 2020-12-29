@@ -16,7 +16,7 @@ A simplified way of leveraging the `Github Contents Api` as Gatsby graphql nodes
 - Add to your gatsby config
 ```js
 {
-  resolve: 'gatsby-source-github-raw',
+  resolve: '@bcgov/gatsby-source-github-raw',
   options: {
     githubAccessToken: '...',
     files: [
@@ -83,7 +83,7 @@ The implied `nodeType` that is created from the directory can be passed in as th
 > gatbsy-config
 ```js
 {
-  resolve: 'gatsby-source-github-raw',
+  resolve: '@bcgov/gatsby-source-github-raw',
   options: {
     githubAccessToken: '...',
     files: 'fooJson'
@@ -107,7 +107,7 @@ const fileCallback = getNodes => {
 
 ```js
 {
-  resolve: 'gatsby-source-github-raw',
+  resolve: '@bcgov/gatsby-source-github-raw',
   options: {
     githubAccessToken: '...',
     files: () => ['https://github.com/foo/bar/blob/master/blah.md']
@@ -118,7 +118,7 @@ const fileCallback = getNodes => {
 ## Exceptions to applying bound properties
 
 Because manifests can be passed in as plain js objects as well as loaded through the use of 
-`gatsby-transformer-json`, to maintain consistency between these two possible sources, the following
+`@bcgov/gatsby-transformer-json`, to maintain consistency between these two possible sources, the following
 properties are not usable within `json` files that are leveraged as a source for files.
 
 - internal
