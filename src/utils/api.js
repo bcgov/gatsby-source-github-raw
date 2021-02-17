@@ -25,7 +25,7 @@ import fetch from 'node-fetch';
  * @param {String} token
  */
 export const fetchFile = async (path, token) => {
-  console.log(`Retrieving resource from "${path}"`);
+  const isFromMaster = /\?ref=master/.test(path);
   const result = await fetch(path, {
     method: 'GET',
     headers: {
@@ -35,6 +35,19 @@ export const fetchFile = async (path, token) => {
   });
   const data = await result.json();
   if (!result.ok || result.status !== 200) {
+    if (isFromMaster) {
+      //trying again with main
+      const result = await fetch(path.replace('ref=master', 'ref=main'), {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'X-GitHub-Media-Type': 'Accept: application/vnd.github.v3.raw+json',
+        },
+      });
+      if (result.okay && result.status === 200) {
+        return await result.json();
+      }
+    }
     throw new Error(
       `Error querying GitHub: ${result.status} ${result.statusText}\n${JSON.stringify(
         data,
