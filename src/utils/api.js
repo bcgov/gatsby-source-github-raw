@@ -35,7 +35,7 @@ export const fetchFile = async (path, token) => {
     },
   });
   const data = await result.json();
-  if (!result.ok || result.status !== 200) {
+  if (result.status !== 200) {
     if (isFromMaster) {
       //trying again with main
       p = path.replace('ref=master', 'ref=main');
@@ -46,7 +46,7 @@ export const fetchFile = async (path, token) => {
           'X-GitHub-Media-Type': 'Accept: application/vnd.github.v3.raw+json',
         },
       });
-      if (result.okay && result.status === 200) {
+      if (result.status === 200) {
         return await result.json();
       }
     }
