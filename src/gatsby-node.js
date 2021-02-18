@@ -97,8 +97,15 @@ export const sourceNodes = async (
 
   return decodedFiles.map(file => {
     const { html_url } = file;
-    // get meta data from urlMap based on this url
-    const metadata = urlMap.get(html_url.toLowerCase()).metadata;
+    let mapData;
+    if (html_url.indexOf('blob/main')) {
+      try {
+        mapData = urlMap.get(html_url.replace('blob/main', 'blob/master').toLowerCase());
+      } catch (e) {}
+    } else {
+      mapData = urlMap.get(html_url.toLowerCase());
+    }
+    const { metadata } = mapData;
     return createNode(createNodeObject(createNodeId, file, metadata));
   });
 };
